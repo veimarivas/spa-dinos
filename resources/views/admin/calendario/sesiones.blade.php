@@ -286,7 +286,7 @@
                         <div class="search-box position-relative">
                             <select id="trabajadorFilter" class="form-select form-select-lg ps-5 rounded-pill border-2"
                                 onchange="filtrarTrabajador(this.value)" style="min-width: 280px; border-color: #1a2d4c;">
-                                <option value="">👥 Todos los fisioterapeutas</option>
+                                <option value="">Todos</option>
                                 @foreach ($fisioterapeutas as $trabajador)
                                     <option value="{{ $trabajador->id }}"
                                         {{ ($trabajadorId ?? '') == $trabajador->id ? 'selected' : '' }}>

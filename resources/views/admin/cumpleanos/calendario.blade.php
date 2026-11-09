@@ -32,6 +32,12 @@
             }
 
             .cumple-hero .page-title-right { flex-wrap: wrap; }
+            .cumple-reset {
+                color: #fff !important;
+                border-color: rgba(255, 255, 255, .55) !important;
+                background: rgba(255, 255, 255, .08) !important;
+            }
+            .cumple-reset:hover { background: rgba(255, 255, 255, .16) !important; }
 
             .cumple-stats > div:nth-child(1) .avatar-title { background: var(--dino-mint-soft) !important; color: var(--dino-green) !important; }
             .cumple-stats > div:nth-child(2) .avatar-title { background: var(--dino-lilac-soft) !important; color: var(--dino-lilac) !important; }
