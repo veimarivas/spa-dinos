@@ -2030,7 +2030,7 @@
     </style>
 
     <!-- Tema Dino Baby Spa (capa de diseño A1) -->
-    <link href="{{ asset('backend/assets/css/dino-theme.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/dino-theme.css') }}?v={{ filemtime(public_path('backend/assets/css/dino-theme.css')) }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="dino-theme">

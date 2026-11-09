@@ -13,7 +13,7 @@
 
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('backend/assets/css/login-3d.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/login-3d.css') }}?v={{ filemtime(public_path('backend/assets/css/login-3d.css')) }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="dino-login">
@@ -61,7 +61,7 @@
             }
         }, 6500);
     </script>
-    <script type="module" src="{{ asset('backend/assets/js/login-3d.js') }}"></script>
+    <script type="module" src="{{ asset('backend/assets/js/login-3d.js') }}?v={{ filemtime(public_path('backend/assets/js/login-3d.js')) }}"></script>
 </body>
 
 </html>
