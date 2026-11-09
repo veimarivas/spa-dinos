@@ -1,11 +1,155 @@
 @extends('admin.dashboard')
 @section('admin')
     <div class="container-fluid">
+        <style>
+            body.dino-theme .page-title-box.sessions-hero {
+                background: linear-gradient(135deg, #0f3b43 0%, #1f7a63 52%, #6d28d9 135%) !important;
+                border: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                flex-wrap: wrap;
+                padding: 22px 26px !important;
+            }
+
+            body.dino-theme .page-title-box.sessions-hero h4 {
+                color: #fff !important;
+                font-family: 'DM Serif Display', Georgia, serif !important;
+                font-weight: 400 !important;
+                font-size: 28px !important;
+            }
+
+            body.dino-theme .page-title-box.sessions-hero p,
+            body.dino-theme .page-title-box.sessions-hero .text-white-50,
+            body.dino-theme .page-title-box.sessions-hero .breadcrumb-item a,
+            body.dino-theme .page-title-box.sessions-hero .breadcrumb-item.active {
+                color: rgba(255, 255, 255, .78) !important;
+            }
+
+            body.dino-theme .page-title-box.sessions-hero .breadcrumb-item + .breadcrumb-item::before {
+                color: rgba(255, 255, 255, .45) !important;
+            }
+
+            .sessions-stats > div:nth-child(1) .avatar-title { background: var(--dino-mint-soft) !important; color: var(--dino-green) !important; }
+            .sessions-stats > div:nth-child(2) .avatar-title { background: #e9f4fa !important; color: #4f9dc4 !important; }
+            .sessions-stats > div:nth-child(3) .avatar-title { background: #fff4e5 !important; color: #b45309 !important; }
+            .sessions-stats > div:nth-child(4) .avatar-title { background: var(--dino-lilac-soft) !important; color: var(--dino-lilac) !important; }
+
+            .sessions-calendar-header .search-box { flex: 1 1 280px; }
+            .sessions-calendar-header .form-select { min-width: 0 !important; }
+
+            #calendar {
+                --fc-page-bg-color: var(--dino-surface);
+                --fc-neutral-bg-color: var(--dino-surface-2);
+                --fc-neutral-text-color: var(--dino-muted);
+                --fc-border-color: var(--dino-border);
+                --fc-button-bg-color: var(--dino-green);
+                --fc-button-border-color: var(--dino-green);
+                --fc-button-hover-bg-color: #24845d;
+                --fc-button-hover-border-color: #24845d;
+                --fc-button-active-bg-color: #1f7a63;
+                --fc-button-active-border-color: #1f7a63;
+                --fc-today-bg-color: rgba(111, 194, 163, .10);
+                --fc-event-bg-color: var(--dino-green);
+                --fc-event-border-color: transparent;
+                --fc-event-text-color: #fff;
+                --fc-highlight-color: rgba(111, 194, 163, .18);
+
+                background: var(--dino-surface);
+                border: 1px solid var(--dino-border);
+                border-radius: 14px;
+                padding: 12px;
+                min-height: 520px;
+            }
+
+            .fc { font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+            .fc .fc-toolbar { flex-wrap: wrap; gap: 8px; }
+            .fc .fc-toolbar-title {
+                font-family: 'DM Serif Display', Georgia, serif;
+                font-size: 1.35rem;
+                color: var(--dino-heading);
+                letter-spacing: -.01em;
+            }
+
+            .fc .fc-button-primary {
+                background: var(--dino-green);
+                border: 0;
+                border-radius: 8px;
+                box-shadow: none;
+                padding: 6px 12px;
+                font-weight: 700;
+                font-size: 12px;
+                text-transform: capitalize;
+            }
+
+            .fc .fc-button-primary:hover { background: #24845d; }
+            .fc .fc-button-primary:not(:disabled).fc-button-active,
+            .fc .fc-button-primary:not(:disabled):active { background: #1f7a63; }
+            .fc .fc-today-button { background: var(--dino-lilac) !important; }
+
+            .fc-theme-standard td,
+            .fc-theme-standard th { border-color: var(--dino-border); }
+            .fc .fc-col-header-cell { background: var(--dino-mint-soft); }
+            .fc .fc-col-header-cell-cushion {
+                color: #2b4a44;
+                font-weight: 800;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: .03em;
+                padding: 8px 4px;
+                white-space: normal;
+            }
+
+            .fc .fc-daygrid-day-number,
+            .fc .fc-timegrid-slot-label-cushion {
+                color: var(--dino-muted);
+                font-size: 11px;
+                font-weight: 600;
+            }
+
+            .fc .fc-timegrid-slot { height: 36px; }
+            .fc .fc-event {
+                border: 0;
+                border-radius: 6px;
+                font-size: 11px;
+                padding: 2px 4px;
+            }
+            .fc .fc-event-title { font-weight: 700; }
+            .fc .fc-scrollgrid { border-radius: 10px; overflow: hidden; }
+            .fc .fc-day-today { background: rgba(111, 194, 163, .08) !important; }
+            .fc .fc-event-tarifa-especial { box-shadow: inset 3px 0 0 #b45309; }
+
+            @media (max-width: 991.98px) {
+                body.dino-theme .page-title-box.sessions-hero { flex-direction: column; align-items: flex-start; }
+            }
+
+            @media (max-width: 767.98px) {
+                body.dino-theme .page-title-box.sessions-hero { padding: 18px 16px !important; }
+                body.dino-theme .page-title-box.sessions-hero h4 { font-size: 22px !important; }
+                #calendar { padding: 6px; min-height: 420px; }
+                .fc .fc-toolbar-title { font-size: 1rem; }
+                .fc .fc-button { padding: 4px 8px; font-size: 10.5px; }
+                .fc .fc-col-header-cell-cushion { font-size: 9px; padding: 6px 1px; }
+                .fc .fc-timegrid-slot { height: 30px; }
+                .sessions-calendar-header > .d-flex { flex-direction: column; align-items: flex-start !important; gap: 10px; }
+                .sessions-calendar-header .search-box,
+                .sessions-calendar-header .search-box select { width: 100%; min-width: 0 !important; }
+            }
+
+            [data-layout-mode="dark"] body.dino-theme .page-title-box.sessions-hero {
+                background: linear-gradient(135deg, #0b1b1e 0%, #173b35 55%, #4c1d95 135%) !important;
+            }
+
+            [data-layout-mode="dark"] #calendar { background: var(--dino-surface); }
+            [data-layout-mode="dark"] .fc .fc-col-header-cell { background: #173b35; }
+            [data-layout-mode="dark"] .fc .fc-col-header-cell-cushion { color: #bfe9da; }
+        </style>
+
         <!-- Page Title -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between rounded-4 p-4 shadow-sm"
-                    style="background: linear-gradient(135deg, #1a2d4c 0%, #037e83 100%);">
+                <div class="page-title-box sessions-hero">
                     <div>
                         <h4 class="mb-1 fw-bold text-white">
                             <i class="ri-calendar-event-line me-2"></i>Calendario de Sesiones
@@ -23,7 +167,7 @@
         </div>
 
         <!-- Stats Cards -->
-        <div class="row mb-4">
+        <div class="row mb-4 sessions-stats">
             <div class="col-xl-3 col-md-6">
                 <div class="card border-0 shadow-sm rounded-4 h-100">
                     <div class="card-body p-4">
@@ -112,7 +256,7 @@
 
         <!-- Calendar Card -->
         <div class="card border-0 shadow-lg rounded-4">
-            <div class="card-header bg-white border-bottom py-3 px-4">
+            <div class="card-header bg-white border-bottom py-3 px-4 sessions-calendar-header">
                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div class="d-flex align-items-center">
                         <div class="avatar-sm rounded-circle me-3" style="background: rgba(3, 126, 131, 0.1);">
@@ -518,7 +662,7 @@
 @endpush
 
 @push('script')
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script src="{{ asset('backend/assets/libs/fullcalendar/index.global.min.js') }}"></script>
     <script>
         // ===== FUNCIÓN PARA FILTRAR POR TRABAJADOR =====
         function filtrarTrabajador(trabajadorId) {
@@ -923,12 +1067,14 @@
             calendarEl.style.opacity = '1';
             calendarEl.style.pointerEvents = 'auto';
 
+            var isMobileCalendar = window.innerWidth < 768;
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'timeGridWeek',
+                initialView: isMobileCalendar ? 'timeGridDay' : 'timeGridWeek',
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'timeGridWeek,timeGridDay'
+                    right: isMobileCalendar ? 'timeGridDay,timeGridWeek' : 'timeGridWeek,timeGridDay'
                 },
                 slotMinTime: '{{ $slotMinTime }}',
                 slotMaxTime: '{{ $slotMaxTime }}',
