@@ -1,10 +1,66 @@
 @extends('admin.dashboard')
 @section('admin')
     <div class="container-fluid">
+        <style>
+            body.dino-theme .page-title-box.productos-hero {
+                background: linear-gradient(135deg, #0f3b43 0%, #1f7a63 50%, #6d28d9 130%) !important;
+                border: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                flex-wrap: wrap;
+                padding: 22px 26px !important;
+            }
+
+            body.dino-theme .page-title-box.productos-hero h4 {
+                color: #fff !important;
+                font-family: 'DM Serif Display', Georgia, serif !important;
+                font-weight: 400 !important;
+                font-size: 28px !important;
+            }
+
+            body.dino-theme .page-title-box.productos-hero p,
+            body.dino-theme .page-title-box.productos-hero .text-muted,
+            body.dino-theme .page-title-box.productos-hero .breadcrumb-item a,
+            body.dino-theme .page-title-box.productos-hero .breadcrumb-item.active {
+                color: rgba(255, 255, 255, .78) !important;
+            }
+
+            .productos-hero .btn-primary {
+                background: #fff !important;
+                color: var(--dino-heading) !important;
+                border: 0 !important;
+                box-shadow: 0 8px 18px rgba(15, 59, 67, .16) !important;
+            }
+
+            .productos-stats .card { border-radius: 16px !important; }
+            .productos-stats > div:nth-child(1) .avatar-title { background: var(--dino-mint-soft) !important; color: var(--dino-green) !important; }
+            .productos-stats > div:nth-child(2) .avatar-title { background: #e9f4fa !important; color: #4f9dc4 !important; }
+            .productos-stats > div:nth-child(3) .avatar-title { background: #fff4e5 !important; color: #b45309 !important; }
+            .productos-stats > div:nth-child(4) .avatar-title { background: #fdecec !important; color: #dc2626 !important; }
+            .productos-stats .card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(15, 59, 67, .08) !important; }
+
+            @media (max-width: 991.98px) {
+                body.dino-theme .page-title-box.productos-hero { flex-direction: column; align-items: flex-start; }
+                .productos-hero .page-title-right { width: 100%; }
+                .productos-hero .page-title-right .btn { width: 100%; }
+            }
+
+            @media (max-width: 767.98px) {
+                body.dino-theme .page-title-box.productos-hero { padding: 18px 16px !important; }
+                body.dino-theme .page-title-box.productos-hero h4 { font-size: 22px !important; }
+            }
+
+            [data-layout-mode="dark"] body.dino-theme .page-title-box.productos-hero {
+                background: linear-gradient(135deg, #0b1b1e 0%, #173b35 55%, #4c1d95 135%) !important;
+            }
+        </style>
+
         <!-- Page Title -->
         <div class="row mb-3">
             <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between bg-light rounded-3 p-3">
+                <div class="page-title-box productos-hero">
                     <div>
                         <h4 class="mb-1 fw-bold text-primary">
                             <i class="ri-box-3-line me-2 text-primary"></i>Gesti&oacute;n de Productos
@@ -26,7 +82,7 @@
         </div>
 
         <!-- Stats Cards -->
-        <div class="row">
+        <div class="row productos-stats">
             <div class="col-xl-3 col-md-6">
                 <div class="card border border-primary">
                     <div class="card-body">
@@ -143,7 +199,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                            <table class="table table-hover table-centered align-middle table-nowrap mb-0 table-card-responsive">
                                 <thead class="table-primary text-muted fw-semibold">
                                     <tr>
                                         <th class="px-3 py-3 text-center" width="5%">#</th>

@@ -2,14 +2,122 @@
 
 @section('admin')
     <div class="container-fluid">
+        <style>
+            body.dino-theme .page-title-box.recibos-hero {
+                background: linear-gradient(135deg, #0f3b43 0%, #1f7a63 50%, #6d28d9 130%) !important;
+                border: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                flex-wrap: wrap;
+                padding: 22px 26px !important;
+            }
+
+            body.dino-theme .page-title-box.recibos-hero h4 {
+                color: #fff !important;
+                font-family: 'DM Serif Display', Georgia, serif !important;
+                font-weight: 400 !important;
+                font-size: 28px !important;
+            }
+
+            body.dino-theme .page-title-box.recibos-hero p,
+            body.dino-theme .page-title-box.recibos-hero .text-white-50,
+            body.dino-theme .page-title-box.recibos-hero .breadcrumb-item a,
+            body.dino-theme .page-title-box.recibos-hero .breadcrumb-item.active {
+                color: rgba(255, 255, 255, .78) !important;
+            }
+
+            body.dino-theme .page-title-box.recibos-hero .breadcrumb-item + .breadcrumb-item::before {
+                color: rgba(255, 255, 255, .45) !important;
+            }
+
+            .recibos-hero .page-title-right { flex-wrap: wrap; gap: 8px; }
+            .recibos-hero .btn-info {
+                background: rgba(255, 255, 255, .16) !important;
+                border: 1px solid rgba(255, 255, 255, .42) !important;
+                color: #fff !important;
+            }
+            .recibos-hero .btn-light {
+                background: #fff !important;
+                color: var(--dino-heading) !important;
+                border: 0 !important;
+            }
+
+            .recibos-filters .card-body { padding: 18px 20px !important; }
+            .recibos-filters .form-label {
+                color: var(--dino-muted) !important;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+            }
+            .recibos-filters .btn-primary {
+                background: var(--dino-green) !important;
+                border-color: var(--dino-green) !important;
+            }
+            .recibos-filters .btn-secondary {
+                background: var(--dino-lilac) !important;
+                border-color: var(--dino-lilac) !important;
+            }
+
+            .recibos-stats .card,
+            .recibos-stats .card.bg-primary,
+            .recibos-stats .card.bg-success,
+            .recibos-stats .card.bg-warning {
+                background: var(--dino-surface) !important;
+                border: 1px solid var(--dino-border) !important;
+                color: var(--dino-text) !important;
+            }
+            .recibos-stats .card p { color: var(--dino-muted) !important; }
+            .recibos-stats .card h3 { color: var(--dino-heading) !important; }
+            .recibos-stats .avatar-lg {
+                background: var(--dino-mint-soft) !important;
+                color: var(--dino-green) !important;
+            }
+            .recibos-stats .avatar-lg i { color: var(--dino-green) !important; }
+            .recibos-stats > div:nth-child(2) .avatar-lg { background: #e9f4fa !important; }
+            .recibos-stats > div:nth-child(2) .avatar-lg i { color: #4f9dc4 !important; }
+            .recibos-stats > div:nth-child(3) .avatar-lg { background: var(--dino-lilac-soft) !important; }
+            .recibos-stats > div:nth-child(3) .avatar-lg i { color: var(--dino-lilac) !important; }
+
+            .recibos-stats .hover-lift { transition: transform .2s ease, box-shadow .2s ease; }
+            .recibos-stats .hover-lift:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(15, 59, 67, .10) !important;
+            }
+
+            .card-section-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding-bottom: 14px;
+                margin-bottom: 16px;
+                border-bottom: 1px solid var(--dino-border);
+            }
+
+            @media (max-width: 991.98px) {
+                body.dino-theme .page-title-box.recibos-hero { flex-direction: column; align-items: flex-start; }
+                .recibos-hero .page-title-right { width: 100%; }
+                .recibos-hero .page-title-right .btn { flex: 1 1 100%; }
+            }
+
+            @media (max-width: 767.98px) {
+                body.dino-theme .page-title-box.recibos-hero { padding: 18px 16px !important; }
+                body.dino-theme .page-title-box.recibos-hero h4 { font-size: 22px !important; }
+            }
+
+            [data-layout-mode="dark"] body.dino-theme .page-title-box.recibos-hero {
+                background: linear-gradient(135deg, #0b1b1e 0%, #173b35 55%, #4c1d95 135%) !important;
+            }
+        </style>
+
         <!-- Page Title -->
         <div class="row mb-4">
             <div class="col-12">
-                <div
-                    class="page-title-box d-sm-flex align-items-center justify-content-between bg-gradient-primary rounded-4 p-4 shadow-sm">
+                <div class="page-title-box recibos-hero">
                     <div>
                         <h4 class="mb-1 fw-bold text-white">
-                            <i class="ri-receipt-line me-2"></i>Reporte de Recibos y Pagos
+                            <i class="ri-file-list-3-line me-2"></i>Reporte de Recibos y Pagos
                         </h4>
                         <p class="text-white-50 mb-0">Visualiza y analiza todos los ingresos del centro</p>
                     </div>
@@ -38,7 +146,7 @@
         <!-- Filtros -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="card border-0 shadow-lg rounded-4">
+                <div class="card border-0 shadow-lg rounded-4 recibos-filters">
                     <div class="card-body p-4">
                         <form method="GET" action="{{ route('admin.recibos.reporte') }}" id="formFiltros">
                             <div class="row g-3 align-items-end">
@@ -96,7 +204,7 @@
         </div>
 
         <!-- Stats Cards -->
-        <div class="row mb-4">
+        <div class="row mb-4 recibos-stats">
             <div class="col-xl-4 col-md-6">
                 <div class="card border-0 shadow-sm rounded-4 h-100 bg-primary text-white hover-lift">
                     <div class="card-body p-4">
@@ -123,7 +231,7 @@
                             </div>
                             <div
                                 class="avatar-lg rounded-circle bg-white bg-opacity-25 d-flex align-items-center justify-content-center">
-                                <i class="ri-receipt-line fs-24 text-white"></i>
+                                <i class="ri-file-list-3-line fs-24 text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -186,7 +294,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0">
+                            <table class="table table-hover align-middle mb-0 table-card-responsive">
                                 <thead class="table-light">
                                     <tr>
                                         <th>Trabajador</th>
@@ -252,7 +360,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive tabla-recibos">
-                            <table class="table table-hover align-middle mb-0" id="recibosTable">
+                            <table class="table table-hover align-middle mb-0 table-card-responsive" id="recibosTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th class="col-recibo"><i class="ri-file-text-line me-1"></i>Recibo</th>
@@ -574,12 +682,12 @@
                 datasets: [{
                     label: 'Ingresos (Bs.)',
                     data: {!! json_encode($ingresosPorDia->pluck('total')) !!},
-                    borderColor: '#405189',
-                    backgroundColor: 'rgba(64, 81, 137, 0.1)',
+                    borderColor: '#2f9e7a',
+                    backgroundColor: 'rgba(47, 158, 122, 0.12)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#405189',
+                    pointBackgroundColor: '#2f9e7a',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     pointRadius: 5,
@@ -621,7 +729,7 @@
                 labels: ['Efectivo', 'QR'],
                 datasets: [{
                     data: [{{ $efectivoTotal }}, {{ $qrTotal }}],
-                    backgroundColor: ['#ffc107', '#0dcaf0'],
+                    backgroundColor: ['#2f9e7a', '#7c3aed'],
                     borderWidth: 3,
                     borderColor: '#fff'
                 }]

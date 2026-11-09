@@ -2278,6 +2278,52 @@
     </script>
 
     @stack('script')
+
+    {{-- Etiquetas para convertir tablas anchas en tarjetas en pantallas pequeñas --}}
+    <script>
+        (function() {
+            function etiquetarTablas() {
+                document.querySelectorAll('table.table-card-responsive').forEach(function(table) {
+                    var headers = Array.prototype.map.call(table.querySelectorAll('thead th'), function(th) {
+                        return (th.textContent || '').replace(/\s+/g, ' ').trim();
+                    });
+
+                    table.querySelectorAll('tbody tr').forEach(function(row) {
+                        Array.prototype.forEach.call(row.children, function(cell, index) {
+                            if (cell.tagName !== 'TD') return;
+                            var label = headers[index] || '';
+                            if (cell.getAttribute('data-label') !== label) {
+                                cell.setAttribute('data-label', label);
+                            }
+                        });
+                    });
+
+                    table.querySelectorAll('tfoot tr').forEach(function(row) {
+                        var columnIndex = 0;
+                        Array.prototype.forEach.call(row.children, function(cell) {
+                            if (cell.tagName !== 'TD') return;
+                            var span = parseInt(cell.getAttribute('colspan') || '1', 10);
+                            if (span === 1) {
+                                var label = headers[columnIndex] || '';
+                                if (cell.getAttribute('data-label') !== label) {
+                                    cell.setAttribute('data-label', label);
+                                }
+                            }
+                            columnIndex += span;
+                        });
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                etiquetarTablas();
+                new MutationObserver(etiquetarTablas).observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        })();
+    </script>
 </body>
 
 </html>

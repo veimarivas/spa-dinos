@@ -70,12 +70,129 @@
 
 @section('admin')
     <div class="container-fluid">
+        <style>
+            body.dino-theme .page-title-box.wk-hero {
+                background: linear-gradient(135deg, #0f3b43 0%, #1f7a63 50%, #6d28d9 130%) !important;
+                border: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                flex-wrap: wrap;
+                padding: 22px 26px !important;
+            }
+
+            body.dino-theme .page-title-box.wk-hero h4 {
+                color: #fff !important;
+                font-family: 'DM Serif Display', Georgia, serif !important;
+                font-weight: 400 !important;
+                font-size: 28px !important;
+            }
+
+            body.dino-theme .page-title-box.wk-hero p,
+            body.dino-theme .page-title-box.wk-hero .text-white-50,
+            body.dino-theme .page-title-box.wk-hero .breadcrumb-item a,
+            body.dino-theme .page-title-box.wk-hero .breadcrumb-item.active {
+                color: rgba(255, 255, 255, .78) !important;
+            }
+
+            body.dino-theme .page-title-box.wk-hero .breadcrumb-item + .breadcrumb-item::before {
+                color: rgba(255, 255, 255, .45) !important;
+            }
+
+            .wk-filters .card-body { padding: 18px 20px !important; }
+            .wk-filters .form-label {
+                color: var(--dino-muted) !important;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+            }
+            .wk-filters button[type="submit"] {
+                background: linear-gradient(135deg, #2f9e7a, #46b98f) !important;
+                border: 0 !important;
+                box-shadow: 0 8px 18px rgba(47, 158, 122, .22) !important;
+            }
+
+            .wk-stats .kpi-card {
+                border-radius: 16px !important;
+                transition: transform .2s ease, box-shadow .2s ease;
+            }
+            .wk-stats .kpi-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(15, 59, 67, .10) !important;
+            }
+            .wk-stats .kpi-card .card-body { padding: 20px 22px !important; }
+            .wk-stats .kpi-card h3 { letter-spacing: -.02em; }
+
+            body.dino-theme .wk-tabs {
+                background: var(--dino-surface-2) !important;
+                border: 1px solid var(--dino-border);
+                padding: 5px;
+                border-radius: 12px;
+                display: inline-flex;
+                gap: 4px;
+                flex-wrap: wrap;
+                max-width: 100%;
+            }
+            body.dino-theme .wk-tabs .nav-link {
+                color: var(--dino-muted) !important;
+                font-weight: 700;
+                border-radius: 9px;
+                padding: 8px 16px;
+                font-size: .8125rem;
+                border: 0;
+                background: transparent;
+            }
+            body.dino-theme .wk-tabs .nav-link.active {
+                background: linear-gradient(135deg, #2f9e7a, #6fc2a3) !important;
+                color: #fff !important;
+            }
+            body.dino-theme .wk-tabs .nav-link.active .badge {
+                background: rgba(255, 255, 255, .25) !important;
+                color: #fff !important;
+            }
+
+            .card-section-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding-bottom: 14px;
+                margin-bottom: 16px;
+                border-bottom: 1px solid var(--dino-border);
+            }
+            .card-section-header .icon-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                flex-shrink: 0;
+            }
+            .card-section-header h5 { font-size: 15px; letter-spacing: -.01em; }
+
+            @media (max-width: 991.98px) {
+                body.dino-theme .page-title-box.wk-hero { flex-direction: column; align-items: flex-start; }
+                body.dino-theme .wk-tabs { width: 100%; }
+                body.dino-theme .wk-tabs .nav-link { flex: 1 1 100%; text-align: center; }
+            }
+
+            @media (max-width: 767.98px) {
+                body.dino-theme .page-title-box.wk-hero { padding: 18px 16px !important; }
+                body.dino-theme .page-title-box.wk-hero h4 { font-size: 22px !important; }
+                .wk-stats .kpi-card .card-body { padding: 16px 18px !important; }
+                .wk-stats .kpi-card h3 { font-size: 1.45rem !important; }
+            }
+
+            [data-layout-mode="dark"] body.dino-theme .page-title-box.wk-hero {
+                background: linear-gradient(135deg, #0b1b1e 0%, #173b35 55%, #4c1d95 135%) !important;
+            }
+        </style>
 
         {{-- ===== PAGE TITLE ===== --}}
         <div class="row mb-4">
             <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between rounded-4 p-4 shadow-sm position-relative overflow-hidden"
-                    style="background: linear-gradient(135deg, #1a2d4c 0%, #b45309 100%);">
+                <div class="page-title-box wk-hero position-relative overflow-hidden">
                     <div class="position-absolute top-0 end-0" style="opacity:.08;font-size:14rem;line-height:1;transform:translate(20%,-20%);">
                         <i class="ri-team-line"></i>
                     </div>
@@ -110,7 +227,7 @@
         </div>
 
         {{-- ===== FILTRO MES / GESTIÓN ===== --}}
-        <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card border-0 shadow-sm rounded-4 mb-4 wk-filters">
             <div class="card-body p-4">
                 <form method="GET" action="{{ route('admin.pagosTrabajadores.index') }}">
                     <div class="row g-3 align-items-end">
@@ -151,7 +268,7 @@
         </div>
 
         {{-- ===== KPI CARDS ===== --}}
-        <div class="row g-3 mb-4">
+        <div class="row g-3 mb-4 wk-stats">
             <div class="col-xl-4 col-md-6">
                 <div class="card kpi-card border-0 shadow-sm rounded-4 h-100"
                     style="border-left:4px solid #b45309 !important;">
@@ -269,7 +386,7 @@
                             </div>
                         @else
                             <div class="table-responsive">
-                                <table class="table table-modern align-middle mb-0">
+                                <table class="table table-modern align-middle mb-0 table-card-responsive">
                                     <thead>
                                         <tr>
                                             <th>Trabajador</th>
@@ -377,7 +494,7 @@
                             </div>
                         @else
                             <div class="table-responsive">
-                                <table class="table table-modern align-middle mb-0">
+                                <table class="table table-modern align-middle mb-0 table-card-responsive">
                                     <thead>
                                         <tr>
                                             <th>Trabajador</th>

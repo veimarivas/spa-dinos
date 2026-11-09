@@ -803,3 +803,144 @@ body.dino-theme .shadow-lg { box-shadow: var(--dino-shadow) !important; }
         transition-duration: .001ms !important;
     }
 }
+
+/* ============================================================
+   13. Tablas que se convierten en tarjetas (sin scroll horizontal)
+   ============================================================ */
+@media (max-width: 1199.98px) {
+    body.dino-theme table.table-card-responsive {
+        width: 100% !important;
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    body.dino-theme table.table-card-responsive thead { display: none !important; }
+
+    body.dino-theme table.table-card-responsive tbody,
+    body.dino-theme table.table-card-responsive tfoot {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    body.dino-theme table.table-card-responsive tbody tr {
+        display: block !important;
+        width: 100% !important;
+        background: var(--dino-surface);
+        border: 1px solid var(--dino-border);
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        box-shadow: var(--dino-shadow);
+    }
+
+    body.dino-theme table.table-card-responsive tbody td {
+        display: flex !important;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 6px 0 !important;
+        border: 0 !important;
+        text-align: right !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        font-size: 12.5px;
+    }
+
+    body.dino-theme table.table-card-responsive tbody td::before {
+        content: attr(data-label);
+        flex: 0 0 40%;
+        text-align: left;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: var(--dino-muted);
+        padding-top: 2px;
+    }
+
+    body.dino-theme table.table-card-responsive tbody td:first-child {
+        border-bottom: 1px dashed var(--dino-border) !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 4px;
+        align-items: center;
+    }
+
+    body.dino-theme table.table-card-responsive tbody td:first-child::before { display: none; }
+    body.dino-theme table.table-card-responsive tbody td[colspan] { display: block !important; text-align: center !important; }
+    body.dino-theme table.table-card-responsive tbody td[colspan]::before { display: none; }
+    body.dino-theme table.table-card-responsive tbody td:empty { display: none !important; }
+
+    body.dino-theme table.table-card-responsive tbody td .btn-group,
+    body.dino-theme table.table-card-responsive tbody td .d-flex {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    body.dino-theme table.table-card-responsive tbody td .badge { white-space: normal; }
+
+    body.dino-theme table.table-card-responsive tfoot {
+        display: block !important;
+        margin-top: 4px;
+    }
+
+    body.dino-theme table.table-card-responsive tfoot tr {
+        display: block !important;
+        background: var(--dino-surface-2);
+        border: 1px solid var(--dino-border);
+        border-radius: 12px;
+        padding: 10px 14px;
+    }
+
+    body.dino-theme table.table-card-responsive tfoot td {
+        display: flex !important;
+        justify-content: space-between;
+        width: 100% !important;
+        border: 0 !important;
+        padding: 4px 0 !important;
+        text-align: right !important;
+        white-space: normal !important;
+        font-size: 12.5px;
+    }
+
+    body.dino-theme table.table-card-responsive tfoot td[colspan] {
+        display: block !important;
+        text-align: left !important;
+        font-weight: 800;
+    }
+
+    body.dino-theme table.table-card-responsive tfoot td::before {
+        content: attr(data-label);
+        flex: 0 0 40%;
+        text-align: left;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: var(--dino-muted);
+        padding-top: 2px;
+    }
+
+    body.dino-theme table.table-card-responsive tfoot td[colspan]::before { display: none; }
+    body.dino-theme table.table-card-responsive tfoot td:empty { display: none !important; }
+
+    body.dino-theme .table-responsive:has(> table.table-card-responsive) {
+        overflow-x: visible !important;
+        max-height: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    body.dino-theme table.table-card-responsive {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    body.dino-theme table.table-card-responsive th,
+    body.dino-theme table.table-card-responsive td {
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+    }
+}
